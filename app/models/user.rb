@@ -1,14 +1,24 @@
 class User
   include Mongoid::Document
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+
+  field :authentication_token, type: String, default: ""
+  field :email, type: String, default: ""
+
+  validates :email, presence: true, uniqueness: true,
+    format: { with: /\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/ }
   
-  acts_as_token_authenticatable
-  field :authentication_token
+  before_create :set_token
+
+  private
+
+  def set_token
+    self.authentication_token = generate_token
+  end
   
-  field :email,              type: String, default: ""
-  field :encrypted_password, type: String, default: ""
-  field :reset_password_token,   type: String
-  field :reset_password_sent_at, type: Time
-  field :remember_created_at, type: Time
+  def generate_token
+    loop do
+      token = SecureRandom.hex(32)
+      break token unless User.where(authentication_token: token).exists?
+    end
+  end
 end
