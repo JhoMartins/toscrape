@@ -13,27 +13,27 @@ Webcrawler/API agregadora de frases do site (Quotes to Scrape)[http://quotes.tos
 
 Para utilizar o projeto é necessário seguir aos seguintes passos:
 
-- Primeiro é necessário clonar o projeto com o comando:
+Primeiro é necessário clonar o projeto com o comando:
 
 `git clone git@github.com:JhoMartins/toscrape.git`
 
-- Entrar na pasta do projeto
+Entrar na pasta do projeto
 
 `cd toscrape`
 
-- Instalar as dependências do projeto: 
+Instalar as dependências do projeto: 
 
 `bundle install`
 
-- Subir o MongoDB
+Subir o MongoDB
 
 `sudo service mongod start`
 
-- Subir o redis
+Subir o redis
 
 `redis-server`
 
-- Subir o sidekiq
+Subir o sidekiq
 
 `bundle exec sidekiq`
 
