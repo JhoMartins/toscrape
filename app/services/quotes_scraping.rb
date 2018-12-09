@@ -17,6 +17,7 @@ class QuotesScraping
         tags = quote.css(".tags").xpath("meta").first["content"].split(",")
         list.push(quote: quote_text, author: author, author_about: author_about, tags: tags)
       end 
+      QuotesCreatorJob.perform_later(list)
       return list
     end
   
